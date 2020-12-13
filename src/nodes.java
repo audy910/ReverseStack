@@ -1,63 +1,83 @@
+import java.util.ArrayList;
 
 public class nodes
 {
     //variables
+
     private Node tail;
-    private Node head;
+    ArrayList<Node> myList;
 
     //constructor
     public nodes()
     {
-        head = null;
+        tail = null;
+        myList = new ArrayList<Node>();
     }
 
     //methods
     public void push()
     {
-        //remove the top
+        //remove the top, replace with bottom
+        Node position = tail;
+        myList.trimToSize();
 
+        if(myList.size() == 0)
+        {
+
+            System.out.println("Delete empty list?");
+            System.exit(1);
+        }
+        else {
+            myList.remove(0);
+
+        }
 
     }
 
     public void pop(int num)
     {
         //add to top
-
-        if(head == null)
-        {
-            head = new Node(num, tail);
-        }
-
         tail = new Node(num, tail);
+        myList.add(tail);
+
+
     }
 
-    public int peek()
+    public String peek()
     {
         //return top number
-        return head.getDate();
+        return "head: "+myList.get(0).getDate();
     }
-    public String headtoString()
+    public String tailToString()
     {
-        return head.toString();
+        return tail.toString();
     }
 
 
     public void showList()
     {
         //system print list in order
-        Node position = head;
-        while (position != null)
-        {
-            System.out.println(position.getDate());
-            position = position.getLink();
+
+        Node[] nodeArr = myList.toArray(new Node[0]);
+        for (Node node : nodeArr) {
+            System.out.print(node.getDate() + ", ");
         }
+//        StringBuilder list = new StringBuilder("The list is: ");
+//        myList.trimToSize();
+//        for(int i = 0; i == myList.size()-1; i++)
+//        {
+//            String nodeValue = (myList.get(i).getDate()) + ", ";
+//            list.append(nodeValue);
+//        }
+//        return list.toString();
+
     }
 
     public int length()
     {
         //return length of the list
         int count = 0;
-        Node position = head;
+        Node position = tail;
         while (position != null)
         {
             count++;
